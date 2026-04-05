@@ -17,16 +17,16 @@ public partial class CalculatorViewModel : ObservableObject
     private string _expression = string.Empty;
 
     [RelayCommand]
-    private void Digit(string digit)
+    private void Digit(string pDigit)
     {
         if (_isNewEntry)
         {
-            Display = digit;
+            Display = pDigit;
             _isNewEntry = false;
         }
         else
         {
-            Display = Display == "0" ? digit : Display + digit;
+            Display = Display == "0" ? pDigit : Display + pDigit;
         }
     }
 
@@ -45,7 +45,7 @@ public partial class CalculatorViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void Operator(string op)
+    private void Operator(string pOp)
     {
         if (_hasOperator)
         {
@@ -53,8 +53,8 @@ public partial class CalculatorViewModel : ObservableObject
         }
 
         _engine.FirstOperand = double.Parse(Display);
-        _engine.Operation = op;
-        Expression = $"{_engine.FirstOperand} {op}";
+        _engine.Operation = pOp;
+        Expression = $"{_engine.FirstOperand} {pOp}";
         _hasOperator = true;
         _isNewEntry = true;
     }
